@@ -30,6 +30,9 @@ class web_elements:
         self.driver.find_element(*web_Locators.add_To_Cart_Button).click()
         self.wait_For_Alert()
         return  "".join([s for s in list(self.driver.find_element(*web_Locators.price).text) if s.isdigit()])
+    
+    def home_Button(self):
+        self.wait.until(EC.element_to_be_clickable(web_Locators.home_Button)).click()
         
 
 

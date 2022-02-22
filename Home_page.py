@@ -47,11 +47,24 @@ class home_Page_Objacts(web_elements):
         
     def place_Order(self):
         self.driver.find_element(*web_Locators.place_Order_Button).click()
-        price = "".join([s for s in list(self.wait.until(EC.visibility_of_element_located(web_Locators.total_In_form)).text) if s.isdigit()])
-        assert self.item_price == price
-        for element in self.wait.until(EC.visibility_of_all_elements_located(web_Locators.form_Fileds)):
-            element.send_keys("test")
-        self.driver.find_element(*web_Locators.form_purces).click
+        assert self.item_price == "".join([s for s in list(self.wait.until(EC.visibility_of_element_located(web_Locators.total_In_form)).text) if s.isdigit()])
+        self.driver.find_element(*web_Locators.form_Name).send_keys("test")
+        self.driver.find_element(*web_Locators.form_country).send_keys("test")
+        self.driver.find_element(*web_Locators.form_city).send_keys("test")
+        self.driver.find_element(*web_Locators.form_card).send_keys("test")
+        self.driver.find_element(*web_Locators.form_Month).send_keys("test")
+        self.driver.find_element(*web_Locators.form_Year).send_keys("test")
+
+        self.driver.find_element(*web_Locators.form_purces).click()
+
+        assert self.wait.until(EC.visibility_of_element_located(web_Locators.post_Form_thenk))
+        self.driver.find_element(*web_Locators.post_submit_button).click()
+        self.driver.find_element(*web_Locators.form_close_Button).click()
+        self.home_Button()
+
+    def delete_order(self):
+        self.wait.until(EC.element_to_be_clickable(web_Locators.order_delete)).click()
+        self.wait.until(EC.staleness_of(self.driver.find_element(*web_Locators.order_delete)))
     
 
 
@@ -61,4 +74,7 @@ test.login()
 test.buy_item()
 test.cart_Item()
 test.place_Order()
+test.buy_item()
+test.cart_Item()
+test.delete_order()
 
