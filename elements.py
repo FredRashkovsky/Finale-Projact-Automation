@@ -6,6 +6,7 @@ from constance import web_Constances
 from locators import web_Locators
 from selenium.webdriver.common.by import By
 
+
 class web_elements:
 
     def __init__(self):

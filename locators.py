@@ -17,3 +17,7 @@ class web_Locators:
     price = (By.XPATH, "//body/div[5]/div[1]/div[2]/h3[1]")
     price_In_Cart = (By.XPATH, "//td[contains(text(),'Samsung galaxy s6')]")
     total_Price = (By.XPATH, "//h3[@id='totalp']")
+    place_Order_Button = (By.XPATH, "//button[contains(text(),'Place Order')]")
+    total_In_form = (By.XPATH, "//label[@id='totalm']")
+    form_Fileds = (By.XPATH, "//input[@class='form-control']")
+    form_purces = (By.XPATH, "//button[contains(text(),'Purchase')]")

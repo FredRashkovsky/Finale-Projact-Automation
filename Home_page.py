@@ -10,6 +10,7 @@ from selenium.webdriver.common.by import By
 class home_Page_Objacts(web_elements):
 
     def __init_subclass__(self):
+        self.item_price = ""
         return super().__init_subclass__()
 
     def sign_Up(self):
@@ -33,27 +34,31 @@ class home_Page_Objacts(web_elements):
         self.wait.until(EC.element_to_be_clickable(web_Locators.item_From_Shop)).send_keys(Keys.CONTROL,Keys.RETURN)
         tabs = self.driver.window_handles
         self.driver.switch_to.window(tabs[1])
-        item_price = self.add_To_Cart()
+        self.item_price = self.add_To_Cart()
         self.driver.close()
         self.driver.switch_to.window(tabs[0])
-        return item_price
 
-    def cart_Item(self, item_price):
+
+    def cart_Item(self):
         self.navigate_To(web_Constances.CART)
         assert self.wait.until(EC.presence_of_element_located(web_Locators.price_In_Cart))
-        assert self.driver.find_element(By.XPATH, "//td[contains(text(),'" + item_price + "')]")
-        assert self.driver.find_element(*web_Locators.total_Price).text == item_price
+        assert self.driver.find_element(By.XPATH, "//td[contains(text(),'" + self.item_price + "')]")
+        assert self.driver.find_element(*web_Locators.total_Price).text == self.item_price
         
-
-class cart_page_objact(home_Page_Objacts):
-    def __init_subclass__(self) :
-        return super().__init_subclass__()
-    
+    def place_Order(self):
+        self.driver.find_element(*web_Locators.place_Order_Button).click()
+        price = "".join([s for s in list(self.wait.until(EC.visibility_of_element_located(web_Locators.total_In_form)).text) if s.isdigit()])
+        assert self.item_price == price
+        for element in self.wait.until(EC.visibility_of_all_elements_located(web_Locators.form_Fileds)):
+            element.send_keys("test")
+        self.driver.find_element(*web_Locators.form_purces).click
     
 
 
 test = home_Page_Objacts()
 test.sign_Up()
 test.login()
-test.cart_Item(test.buy_item())
+test.buy_item()
+test.cart_Item()
+test.place_Order()
 
