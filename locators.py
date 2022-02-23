@@ -31,3 +31,4 @@ class web_Locators:
     home_Button = (By.XPATH, "//a[@id='nava']")
     post_submit_button = (By.XPATH, "//button[contains(text(),'OK')]")
     form_close_Button = (By.XPATH, "//body/div[@id='orderModal']/div[1]/div[1]/div[3]/button[1]")
+    name_Of_User = (By.XPATH, "//a[@id='nameofuser']")

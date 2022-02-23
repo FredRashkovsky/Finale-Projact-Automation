@@ -30,6 +30,7 @@ class home_Page_Objacts(web_elements):
         self.wait_For_Alert()
         self.driver.find_element(*web_Locators.login_Close_Buttton).click()
 
+
     def buy_item(self):
         self.wait.until(EC.element_to_be_clickable(web_Locators.item_From_Shop)).send_keys(Keys.CONTROL,Keys.RETURN)
         tabs = self.driver.window_handles
